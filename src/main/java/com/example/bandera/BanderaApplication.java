@@ -15,8 +15,7 @@ public class BanderaApplication {
 		customers d = new customers();
 
 
-		//int i = 0;//vehicle primary key
-		//int j = 0;//customer primary key
+
 
 
 		//j = d.getCustomerPrimaryKey();
