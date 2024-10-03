@@ -13,7 +13,7 @@ public class BanderaApplication {
 
 		/* ------------------CRUD FORM --------------- */
 		customers d = new customers();
-		//d.updateCustomersRow();
+
 
 		//int i = 0;//vehicle primary key
 		//int j = 0;//customer primary key
