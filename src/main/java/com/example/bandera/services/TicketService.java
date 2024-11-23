@@ -18,18 +18,11 @@ public class TicketService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    //Do I still neeed this ?
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private TicketRepository ticketRepository;
-    //@Autowired
-    /*
-    public TicketService(TicketRepository ticketRepo, CustomerService customerService) {
-        this.ticketRepository = ticketRepo;
-        this.customerService = customerService;
-    }
-    */
+
     public TicketEntity addTicket(TicketEntity ticket) {
         CustomersEntity customer = ticket.getCustomer();
         if (customer.getVehicle() != null && customer.getVehicle().getVehicleId() == null) {
