@@ -2,6 +2,7 @@ package com.example.bandera.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "customers_entity")
@@ -13,6 +14,7 @@ public class CustomersEntity {
     private String lastName;
     private String phoneNumber;
     private String email;
+    @DBRef
     private VehicleEntity vehicle;
 
 

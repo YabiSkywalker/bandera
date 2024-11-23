@@ -4,6 +4,7 @@ import com.example.bandera.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class TicketEntity {
     private BigDecimal laborRate;
     private BigDecimal preliminaryCost;
     private TicketStatus ticketStatus;
+    @DBRef
     private CustomersEntity customer;
 
     /* ------------------------ GETTERS && SETTERS --------------------- */

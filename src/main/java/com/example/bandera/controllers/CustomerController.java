@@ -1,8 +1,8 @@
 package com.example.bandera.controllers;
 
 import com.example.bandera.dataTransferObjects.CustomerUpdateDTO;
-import com.example.bandera.services.CustomerService;
 import com.example.bandera.entities.CustomersEntity;
+import com.example.bandera.services.CustomerService;
 import jakarta.validation.Valid;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,15 @@ public class CustomerController {
 
 
     /* ------------------------- CREATE ---------------------------- */
-    //@PostMapping("/addNewCustomer")
-    public ResponseEntity<CustomerUpdateDTO> addNewCustomer(@Valid @RequestBody CustomerUpdateDTO customerInfo) {
-        CustomerUpdateDTO customers = customerService.addCustomer(customerInfo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(customers);
+    @PostMapping("/addNewCustomer")
+    public ResponseEntity<CustomersEntity> addCustomer(@Valid @RequestBody CustomersEntity customer) {
+
+
+        CustomersEntity c = customerService.addCustomer(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(c);
     }
 
-    /* ------------------------- READ ---------------------------- */
+            /* ------------------------- READ ---------------------------- */
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable String id) {
 

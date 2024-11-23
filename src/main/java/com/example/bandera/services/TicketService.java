@@ -1,6 +1,8 @@
 package com.example.bandera.services;
 
+import com.example.bandera.entities.CustomersEntity;
 import com.example.bandera.entities.TicketEntity;
+import com.example.bandera.entities.VehicleEntity;
 import com.example.bandera.repositories.CustomerRepository;
 import com.example.bandera.repositories.TicketRepository;
 import com.example.bandera.repositories.VehicleRepository;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @Service
 public class TicketService {
-    private final CustomerService customerService;
+    //private final CustomerService customerService;
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -22,23 +24,38 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
     //@Autowired
+    /*
     public TicketService(TicketRepository ticketRepo, CustomerService customerService) {
         this.ticketRepository = ticketRepo;
         this.customerService = customerService;
     }
+    */
     public TicketEntity addTicket(TicketEntity ticket) {
-       // CustomersEntity existingCustomer = customerRepository.findByEmail(ticket.getCustomer().getEmail());
+        CustomersEntity customer = ticket.getCustomer();
+        if (customer.getVehicle() != null && customer.getVehicle().getVehicleId() == null) {
+            VehicleEntity saveVehicle = vehicleRepository.save(customer.getVehicle());
+            customer.setVehicle(saveVehicle);
+        }
+
+        if (customer.getId() == null) {
+            CustomersEntity savedCustomer = customerRepository.save(customer);
+            ticket.setCustomer(savedCustomer); // Update the ticket with the saved customer
+        } else {
+            // Ensure the customer is fetched from the database if it already exists
+            customer = customerRepository.findById(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+            ticket.setCustomer(customer);
+        }
+
+
 
         TicketEntity savedTicket = ticketRepository.save(ticket);
-
-
         //System.out.println(savedTicket);
         return savedTicket;
     }
 
     public List<TicketEntity> getAllTickets() {
-        List<TicketEntity> tickets = ticketRepository.findAll();
-        return tickets;
+        return ticketRepository.findAll();
     }
 
     public TicketEntity updateTicket(String id, TicketEntity update) {

@@ -25,14 +25,16 @@ public class TicketController {
     }
     @PostMapping("/createTicket")
     public ResponseEntity<TicketEntity> createNewTicket(@Valid @RequestBody TicketEntity ticketInfo) {
-        TicketEntity t = ticketService.addTicket(ticketInfo);
 
+        TicketEntity t = ticketService.addTicket(ticketInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body(t);
     }
 
     @GetMapping("/getAllTickets")
-    public List<TicketEntity> getAllTickets() {
-        return ticketService.getAllTickets();
+    public ResponseEntity<List<TicketEntity>> getAllTickets() {
+        List<TicketEntity> tickets = ticketService.getAllTickets();
+        System.out.println("Fetched Tickets: " + tickets);
+        return ResponseEntity.ok(tickets);
     }
 
     @PatchMapping("/{id}/update")
