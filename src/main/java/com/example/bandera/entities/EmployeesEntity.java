@@ -1,6 +1,6 @@
 package com.example.bandera.entities;
-
-
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,12 +8,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class EmployeesEntity {
     @Id
     private String id;
+    @NotNull
+    @Size(min = 1, max = 50)
     private String firstName;
+    @NotNull
+    @Size(min = 1, max = 50)
     private String lastName;
+    @NotNull
+    @Size(min = 1, max = 15)
     private String phoneNumber;
-    private static String address;
+    private String address;
     private String email;
-    private String workOrder;
+
+    public EmployeesEntity() {}
+    public EmployeesEntity(String id, String firstName, String lastName, String phoneNumber, String address, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+    }
 
     /* --------------------------- Getters/Setters ---------------------------- */
 
@@ -49,11 +64,11 @@ public class EmployeesEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public static String getAddress() {
+    public String getAddress() {
         return address;
     }
-    public static void setAddress(String address) {
-        EmployeesEntity.address = address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -64,12 +79,15 @@ public class EmployeesEntity {
         this.email = email;
     }
 
-    public String getWorkOrder() {
-        return workOrder;
-    }
-
-    public void setWorkOrder(String workOrder) {
-        this.workOrder = workOrder;
+    @Override
+    public String toString() {
+        return "EmployeesEntity{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
-
