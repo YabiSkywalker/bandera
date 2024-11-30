@@ -1,10 +1,18 @@
 package com.example.bandera.dataTransferObjects;
 
-public class VehicleUpdateDTO {
+public class VehicleDTO {
+    private int year;
     private String make;
     private String model;
     private String vin;
-    private int year;
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     public String getMake() {
         return make;
@@ -22,14 +30,6 @@ public class VehicleUpdateDTO {
         this.model = model;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public String getVin() {
         return vin;
     }
@@ -38,4 +38,3 @@ public class VehicleUpdateDTO {
         this.vin = vin;
     }
 }
-

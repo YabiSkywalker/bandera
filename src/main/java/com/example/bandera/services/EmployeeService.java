@@ -2,7 +2,6 @@ package com.example.bandera.services;
 
 import com.example.bandera.entities.EmployeesEntity;
 import com.example.bandera.repositories.EmployeeRepository;
-import com.example.bandera.dataTransferObjects.EmployeeUpdateDTO;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,22 +30,17 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public EmployeesEntity updateEmployeeInfo(String id, EmployeeUpdateDTO update) {
+    public EmployeesEntity updateEmployeeInfo(String id, EmployeesEntity update) {
         EmployeesEntity e = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
-        if (EmployeeUpdateDTO.getFirstName() != null) {
-            e.setFirstName(update.getFirstName());
-        }
-        if (EmployeeUpdateDTO.getLastName() != null) {
-            e.setLastName(update.getLastName());
-        }
-        if (EmployeeUpdateDTO.getPhoneNumber() != null) {
-            e.setPhoneNumber(update.getPhoneNumber());
-        }
-        if (EmployeeUpdateDTO.getEmail() != null) {
-            e.setEmail(update.getEmail());
-        }
+        e.setFirstName(update.getFirstName());
+        e.setLastName(update.getLastName());
+        e.setAddress(update.getAddress());
+        e.setPhoneNumber(update.getPhoneNumber());
+        e.setEmail(update.getEmail());
+
+
         return employeeRepository.save(e);
     }
     public EmployeesEntity deleteEmployeeById(String id) {

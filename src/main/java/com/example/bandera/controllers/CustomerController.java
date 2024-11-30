@@ -1,8 +1,8 @@
 package com.example.bandera.controllers;
 
-import com.example.bandera.dataTransferObjects.CustomerUpdateDTO;
 import com.example.bandera.entities.CustomersEntity;
 import com.example.bandera.services.CustomerService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ public class CustomerController {
 
 
     /* ------------------------- CREATE ---------------------------- */
+    @Operation(summary = "Add a new customer")
     @PostMapping("/addNewCustomer")
     public ResponseEntity<CustomersEntity> addCustomer(@Valid @RequestBody CustomersEntity customer) {
 
@@ -32,6 +33,7 @@ public class CustomerController {
     }
 
             /* ------------------------- READ ---------------------------- */
+    @Operation(summary = "Find customer by their customer id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable String id) {
 
@@ -43,6 +45,7 @@ public class CustomerController {
         }
     }
 
+    @Operation(summary = "Get all existing customers")
     @GetMapping("/getAllCustomers")
     public List<CustomersEntity> getAllCustomers() {
         return customerService.getAllCustomers();
@@ -50,8 +53,9 @@ public class CustomerController {
 
     /* ------------------------- UPDATE ---------------------------- */
 
-    //@PatchMapping("/{id}/update")
-    public ResponseEntity<CustomersEntity> updateCustomerInfo(@PathVariable String id, @RequestBody CustomerUpdateDTO update) {
+    @Operation(summary = "Update customer information")
+    @PatchMapping("/{id}/update")
+    public ResponseEntity<CustomersEntity> updateCustomerInfo(@PathVariable String id, @RequestBody CustomersEntity update) {
         CustomersEntity updateCustomer = customerService.updateCustomerInfo(id, update);
         return ResponseEntity.ok(updateCustomer);
     }

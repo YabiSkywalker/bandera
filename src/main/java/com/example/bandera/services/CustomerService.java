@@ -1,8 +1,6 @@
 package com.example.bandera.services;
 
-import com.example.bandera.dataTransferObjects.CustomerUpdateDTO;
 import com.example.bandera.entities.CustomersEntity;
-import com.example.bandera.entities.VehicleEntity;
 import com.example.bandera.repositories.CustomerRepository;
 import com.example.bandera.repositories.VehicleRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -41,10 +39,7 @@ public class CustomerService {
 
     public CustomersEntity addCustomer(CustomersEntity customer) {
 
-        if (customer.getVehicle() != null && customer.getId() == null) {
-            VehicleEntity savedVehicle = vehicleRepository.save(customer.getVehicle());
-            customer.setVehicle(savedVehicle); // Set the persisted vehicle with its ID
-        }
+
 
         CustomersEntity savedCustomer = customerRepository.save(customer);
         return savedCustomer;
@@ -53,7 +48,7 @@ public class CustomerService {
 
 
 
-    public CustomersEntity updateCustomerInfo(String id, CustomerUpdateDTO update) {
+    public CustomersEntity updateCustomerInfo(String id, CustomersEntity update) {
         //Getting the customer entry first
         CustomersEntity c = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));

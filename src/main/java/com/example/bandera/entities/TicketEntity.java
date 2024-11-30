@@ -3,13 +3,16 @@ package com.example.bandera.entities;
 import com.example.bandera.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Document(collection = "ticket_entity")
@@ -19,21 +22,38 @@ public class TicketEntity {
     @Id
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
-    //private VehicleEntity vehicle;
     /* ------------------------ the start of the columns for the ticket_entity --------------------- */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm a")
     private LocalDateTime dateTime;
-    //private String serviceType;
-    //private String serviceDetails;
-    //private List<PartEntity> partsRequired;
+    @DBRef
+    @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private EmployeesEntity assignee; //assignee field
 
     private List<ServiceEntity> serviceEntity;
-    private int laborHours;
-    private BigDecimal laborRate;
-    private BigDecimal preliminaryCost;
+    @NotNull
+    private BigDecimal preliminaryCost; //up front estimate
+    @NotNull
+    private BigDecimal tax; //place holder
+    @NotNull
+    private double subtotal;
+    @NotNull
     private TicketStatus ticketStatus;
     @DBRef
+    @NotNull
     private CustomersEntity customer;
+    @DBRef
+    @NotNull
+    private VehicleEntity vehicle;
+    @CreatedDate
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime lastModified;
 
     /* ------------------------ GETTERS && SETTERS --------------------- */
 
@@ -42,19 +62,14 @@ public class TicketEntity {
     public String getId() {
         return id;
     }
- /*
-    public void setId(String id) {
-        this.id = id;
-    }
-    public VehicleEntity getVehicle() {
-        return vehicle;
+
+    public EmployeesEntity getAssignee() {
+        return assignee;
     }
 
-    public void setVehicle(VehicleEntity vehicle) {
-        this.vehicle = vehicle;
+    public void setAssignee(EmployeesEntity assignee) {
+        this.assignee = assignee;
     }
-
-     */
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -71,33 +86,18 @@ public class TicketEntity {
     public void setCustomer(CustomersEntity customer) {
         this.customer = customer;
     }
-
-    /*
-    public String getServiceType() {
-        return serviceType;
+    public void addService(ServiceEntity service) {
+        if (service != null) {
+            this.serviceEntity.add(service);
+        }
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    // Method to remove a service from the list
+    public void removeServiceByIndex(int index) {
+        if (index >= 0 && index < this.serviceEntity.size()) {
+            this.serviceEntity.remove(index);
+        }
     }
-
-    public String getServiceDetails() {
-        return serviceDetails;
-    }
-
-    public void setServiceDetails(String serviceDetails) {
-        this.serviceDetails = serviceDetails;
-    }
-
-    public List<PartEntity> getPartsRequired() {
-        return partsRequired;
-    }
-
-    public void setPartsRequired(List<PartEntity> partsRequired) {
-        this.partsRequired = partsRequired;
-    }
-
-     */
 
     public List<ServiceEntity> getServiceEntity() {
         return serviceEntity;
@@ -107,21 +107,7 @@ public class TicketEntity {
         this.serviceEntity = serviceEntity;
     }
 
-    public int getLaborHours() {
-        return this.laborHours;
-    }
 
-    public void setLaborHours(int laborHours) {
-        this.laborHours = laborHours;
-    }
-
-    public BigDecimal getLaborRate() {
-        return laborRate;
-    }
-
-    public void setLaborRate(BigDecimal laborRate) {
-        this.laborRate = laborRate;
-    }
 
     public BigDecimal getPreliminaryCost() {
         return preliminaryCost;
@@ -129,6 +115,22 @@ public class TicketEntity {
 
     public void setPreliminaryCost(BigDecimal preliminaryCost) {
         this.preliminaryCost = preliminaryCost;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public TicketStatus getTicketStatus() {
@@ -139,5 +141,11 @@ public class TicketEntity {
         this.ticketStatus = status;
     }
 
+    public VehicleEntity getVehicle() {
+        return vehicle;
+    }
 
+    public void setVehicle(VehicleEntity vehicle) {
+        this.vehicle = vehicle;
+    }
 }

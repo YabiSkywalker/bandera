@@ -1,8 +1,9 @@
 package com.example.bandera.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "customers_entity")
@@ -10,20 +11,23 @@ public class CustomersEntity {
     @Id
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
+    @NotNull
+    @Size(min = 1, max = 15)
     private String firstName;
+    @NotNull
+    @Size(min = 1, max = 15)
     private String lastName;
+    @NotNull
+    @Size(min = 1, max = 15)
     private String phoneNumber;
+    @NotNull
+    @Size(min = 1, max = 30)
     private String email;
-    @DBRef
-    private VehicleEntity vehicle;
+
 
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -41,11 +45,9 @@ public class CustomersEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -58,11 +60,5 @@ public class CustomersEntity {
         this.email = email;
     }
 
-    public VehicleEntity getVehicle() {
-        return vehicle;
-    }
 
-    public void setVehicle(VehicleEntity vehicle) {
-        this.vehicle = vehicle;
-    }
 }

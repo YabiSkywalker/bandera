@@ -3,6 +3,7 @@ package com.example.bandera.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "vehicle_entity")
@@ -14,6 +15,8 @@ public class VehicleEntity {
     private String make;
     private String model;
     private String vin;
+    @DBRef
+    private CustomersEntity owner;
 
     public String getVehicleId() {
         return vehicleId;
@@ -55,4 +58,11 @@ public class VehicleEntity {
     }
 
 
+    public CustomersEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(CustomersEntity owner) {
+        this.owner = owner;
+    }
 }
