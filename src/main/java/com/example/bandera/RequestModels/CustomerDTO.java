@@ -1,4 +1,4 @@
-package com.example.bandera.dataTransferObjects;
+package com.example.bandera.RequestModels;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

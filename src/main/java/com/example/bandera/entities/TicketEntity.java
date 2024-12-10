@@ -1,6 +1,6 @@
 package com.example.bandera.entities;
 
-import com.example.bandera.TicketStatus;
+import com.example.bandera.configuration.TicketStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

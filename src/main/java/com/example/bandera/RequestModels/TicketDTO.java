@@ -1,6 +1,6 @@
-package com.example.bandera.dataTransferObjects;
+package com.example.bandera.RequestModels;
 
-import com.example.bandera.TicketStatus;
+import com.example.bandera.configuration.TicketStatus;
 import com.example.bandera.entities.ServiceEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;

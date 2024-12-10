@@ -27,6 +27,7 @@ public class EmployeesEntity {
     @Indexed(unique = true)
     private String email;
 
+
     // Initialize the list to avoid NullPointerException
 
 
@@ -76,7 +77,6 @@ public class EmployeesEntity {
         this.email = email;
     }
 
-
     /*
     @Override
     public String toString() {
@@ -95,3 +95,4 @@ public class EmployeesEntity {
 
  */
 }
+

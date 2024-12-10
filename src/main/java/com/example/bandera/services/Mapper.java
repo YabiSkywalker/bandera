@@ -1,7 +1,8 @@
 package com.example.bandera.services;
 
-import com.example.bandera.dataTransferObjects.TicketDTO;
-import com.example.bandera.dataTransferObjects.VehicleDTO;
+import com.example.bandera.RequestModels.EmployeeDTO;
+import com.example.bandera.RequestModels.TicketDTO;
+import com.example.bandera.RequestModels.VehicleDTO;
 import com.example.bandera.entities.CustomersEntity;
 import com.example.bandera.entities.EmployeesEntity;
 import com.example.bandera.entities.TicketEntity;
@@ -49,4 +50,12 @@ public class Mapper {
         System.out.println(mappedTicket);
         return mappedTicket;
     }
+
+    public EmployeeDTO employeeEntityToDto(EmployeesEntity e) {
+        EmployeeDTO assignee = new EmployeeDTO();
+        assignee.setFirstName(e.getFirstName());
+        assignee.setLastName(e.getLastName());
+        return assignee;
+    }
+
 }

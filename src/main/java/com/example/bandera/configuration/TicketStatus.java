@@ -1,4 +1,4 @@
-package com.example.bandera;
+package com.example.bandera.configuration;
 
 public enum TicketStatus {
     INIT("INIT"),       // Instead of INITIATED

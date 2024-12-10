@@ -1,6 +1,7 @@
 package com.example.bandera.services;
 
 import com.example.bandera.entities.EmployeesEntity;
+import com.example.bandera.repositories.AuthorizationRepository;
 import com.example.bandera.repositories.EmployeeRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    private AuthorizationRepository authorizationRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepo) {
+    public EmployeeService(EmployeeRepository employeeRepo, AuthorizationRepository authRepo) {
         this.employeeRepository = employeeRepo;
+        this.authorizationRepository = authRepo;
     }
     public List<EmployeesEntity> getAllEmployees() {
         return employeeRepository.findAll();
@@ -27,7 +30,11 @@ public class EmployeeService {
     }
 
     public EmployeesEntity addEmployee(EmployeesEntity employee) {
-        return employeeRepository.save(employee);
+
+        EmployeesEntity savedEmployee = employeeRepository.save(employee);
+
+        return savedEmployee;
+
     }
 
     public EmployeesEntity updateEmployeeInfo(String id, EmployeesEntity update) {
@@ -39,6 +46,7 @@ public class EmployeeService {
         e.setAddress(update.getAddress());
         e.setPhoneNumber(update.getPhoneNumber());
         e.setEmail(update.getEmail());
+
 
 
         return employeeRepository.save(e);

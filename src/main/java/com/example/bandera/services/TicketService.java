@@ -1,7 +1,7 @@
 package com.example.bandera.services;
 
-import com.example.bandera.TicketStatus;
-import com.example.bandera.dataTransferObjects.TicketDTO;
+import com.example.bandera.configuration.TicketStatus;
+import com.example.bandera.RequestModels.TicketDTO;
 import com.example.bandera.entities.*;
 import com.example.bandera.repositories.CustomerRepository;
 import com.example.bandera.repositories.EmployeeRepository;

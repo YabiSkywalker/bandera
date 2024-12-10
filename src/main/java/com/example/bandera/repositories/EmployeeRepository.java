@@ -12,4 +12,6 @@ public interface EmployeeRepository extends MongoRepository<EmployeesEntity, Str
     @Query("{ 'isDefault': true }")
     Optional<EmployeesEntity> findDefaultEmployee();
     Optional<EmployeesEntity> findById(String id);
+
+
 }

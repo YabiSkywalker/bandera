@@ -26,6 +26,7 @@ public class EmployeesController {
 
     public ResponseEntity<?> addNewEmployee(@RequestBody EmployeesEntity employeeInfo) {
         EmployeesEntity employees = employeeService.addEmployee(employeeInfo);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(employees);
     }
 
