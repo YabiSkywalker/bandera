@@ -1,0 +1,7 @@
+
+<h1>Bandera<br/><a href="https://github.com/YabiSkywalker"></a> <a href="https://www.linkedin.com/in/yabi/">Server Side API</a>
+<h2>Overview</h2>
+<p>Greetings and salutations,
+Bandera is a Java based microservice constructed to serve as a centralized .</p>
+
+<h2>Directory Structure</h2>
