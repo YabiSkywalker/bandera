@@ -61,5 +61,8 @@ Bandera is a Java based microservice constructed to serve as a central API for C
                                                 └─────────────── ☕ QueryService.java
                                                 └─────────────── ☕ TicketService.java
                                                 └─────────────── ☕ VehicleService.java
-                                            └── README.md
+                                            └── BanderaApplication.java       ────────────────────────────────────────────────────────────────   # Main Method
+                                            └── NotificationEventListner.java ────────────────────────────────────────────────────────────────   # Event listener for `status` changes
+                                            └── NotificationService.java      ────────────────────────────────────────────────────────────────   # AWS connection for publishing events 
+                                            
             
