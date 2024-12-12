@@ -1,0 +1,14 @@
+package com.example.bandera.Repositories;
+
+import com.example.bandera.Entities.CustomersEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface CustomerRepository extends MongoRepository<CustomersEntity, String> {
+    CustomersEntity findByEmail(String email);
+    Optional<CustomersEntity> findById(String id);
+}
+

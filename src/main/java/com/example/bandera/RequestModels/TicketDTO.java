@@ -1,11 +1,10 @@
 package com.example.bandera.RequestModels;
 
-import com.example.bandera.configuration.TicketStatus;
-import com.example.bandera.entities.ServiceEntity;
+import com.example.bandera.Configuration.TicketStatus;
+import com.example.bandera.Entities.ServiceEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,9 @@ public class TicketDTO {
     @NotNull
     private List<ServiceEntity> services = new ArrayList<>();
 
-    private BigDecimal preliminaryCost;
+    private double preliminaryCost;
 
-    private BigDecimal tax;
+    private double tax;
     @NotNull
     private double subtotal;
 
@@ -49,18 +48,18 @@ public class TicketDTO {
         }
     }
 
-    public BigDecimal getPreliminaryCost() {
+    public double getPreliminaryCost() {
         return preliminaryCost;
     }
 
-    public void setPreliminaryCost(BigDecimal preliminaryCost) {
+    public void setPreliminaryCost(double preliminaryCost) {
         this.preliminaryCost = preliminaryCost;
     }
 
-    public BigDecimal getTax() {
+    public double getTax() {
         return tax;
     }
-    public void setTax(BigDecimal tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 

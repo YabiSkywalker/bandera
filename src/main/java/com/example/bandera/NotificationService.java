@@ -2,7 +2,7 @@ package com.example.bandera;
 
 /*
 public class NotificationService {
-    private final String Topic_Arn = "arn:aws:sns:us-east-1:897105211357:TicketNotifications";
+    private final String Topic_Arn = <YOUR AWS TOPIC ARN>;
 
     public void sendNotification(String message) {
         try (SnsClient snsClient = SnsClient.create()) {
