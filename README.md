@@ -9,10 +9,11 @@ Bandera is a Java based microservice constructed to serve as a central API for C
 
 
 
-
-                
-                        └───── 📂java
-                                └───── 📦 com.example.bandera
+                      └ 📂 bandera
+                        └ 📂 src
+                          └ 📂 main
+                            └ 📂 java
+                                └ 📦 com.example.bandera
                                             ├── 🧩 Configuration   ───────────────────────────────────────────────────────────────────────────   # OpenAPI/Swagger, MongoDB and Application config files
                                                 └─────────────── ☕ MongoConfig.java
                                                 └─────────────── ☕ SwaggerConfig.java
