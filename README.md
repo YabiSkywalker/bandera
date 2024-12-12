@@ -6,3 +6,12 @@ Bandera is a Java based microservice constructed to serve as a central API for C
 
 <h2>Directory Structure</h2>
 
+src
+    ├── build                   # Compiled files (alternatively `dist`)
+    ├── docs                    # Documentation files (alternatively `doc`)
+    ├── src                     # Source files (alternatively `lib` or `app`)
+    ├── test                    # Automated tests (alternatively `spec` or `tests`)
+    ├── tools                   # Tools and utilities
+    ├── LICENSE
+    └── README.md
+
