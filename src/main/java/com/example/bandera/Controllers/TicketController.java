@@ -2,8 +2,8 @@ package com.example.bandera.Controllers;
 
 import com.example.bandera.RequestModels.TicketDTO;
 import com.example.bandera.Configuration.TicketStatus;
-import com.example.bandera.Entities.ServiceEntity;
-import com.example.bandera.Entities.TicketEntity;
+import com.example.bandera.entities.ServiceEntity;
+import com.example.bandera.entities.TicketEntity;
 import com.example.bandera.Repositories.TicketRepository;
 import com.example.bandera.Services.TicketService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +27,10 @@ public class TicketController {
 
     public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
+    }
+
+    public TicketController() {
+
     }
 
     @Operation(summary = "Create a new ticket")

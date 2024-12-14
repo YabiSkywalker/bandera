@@ -1,7 +1,7 @@
 package com.example.bandera.RequestModels;
 
 import com.example.bandera.Configuration.TicketStatus;
-import com.example.bandera.Entities.ServiceEntity;
+import com.example.bandera.entities.ServiceEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 

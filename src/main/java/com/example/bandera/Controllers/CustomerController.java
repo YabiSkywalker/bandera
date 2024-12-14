@@ -1,6 +1,6 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.Entities.CustomersEntity;
+import com.example.bandera.entities.CustomersEntity;
 import com.example.bandera.Services.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;

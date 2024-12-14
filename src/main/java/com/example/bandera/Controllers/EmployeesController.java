@@ -1,6 +1,6 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.Entities.EmployeesEntity;
+import com.example.bandera.entities.EmployeesEntity;
 import com.example.bandera.Services.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.velocity.exception.ResourceNotFoundException;

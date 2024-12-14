@@ -1,4 +1,4 @@
-package com.example.bandera.Entities;
+package com.example.bandera.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

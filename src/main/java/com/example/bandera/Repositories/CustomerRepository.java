@@ -1,6 +1,6 @@
 package com.example.bandera.Repositories;
 
-import com.example.bandera.Entities.CustomersEntity;
+import com.example.bandera.entities.CustomersEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

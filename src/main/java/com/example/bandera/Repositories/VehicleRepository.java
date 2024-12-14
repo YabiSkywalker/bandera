@@ -1,6 +1,6 @@
 package com.example.bandera.Repositories;
 
-import com.example.bandera.Entities.VehicleEntity;
+import com.example.bandera.entities.VehicleEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

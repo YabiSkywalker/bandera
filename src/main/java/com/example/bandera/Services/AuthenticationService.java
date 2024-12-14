@@ -1,10 +1,10 @@
 package com.example.bandera.Services;
 
 
-import com.example.bandera.RequestModels.AuthDTO;
-import com.example.bandera.Entities.AuthorizationEntity;
+import com.example.bandera.entities.AuthorizationEntity;
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
+import com.example.bandera.RequestModels.AuthDTO;
 import com.example.bandera.Secrets.JwtTokenUtil;
 import com.example.bandera.Secrets.PasswordUtil;
 import org.springframework.stereotype.Service;

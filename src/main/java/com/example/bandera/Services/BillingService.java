@@ -1,7 +1,13 @@
 package com.example.bandera.Services;
 
-import com.example.bandera.Entities.TicketEntity;
+import com.example.bandera.Repositories.TicketRepository;
+import com.example.bandera.entities.TicketEntity;
+import org.apache.velocity.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class BillingService {
 
 
@@ -42,30 +48,38 @@ public class BillingService {
 }
 
 */
+    @Autowired
+    private TicketRepository ticketRepository;
+
+    public BillingService(TicketRepository ticketRepository) {
+        this.ticketRepository = ticketRepository;
+    }
 
 
-
-    public String reconciler(TicketEntity ticket) {
-
+    public double reconciler(String id) {
+        TicketEntity billingInquiry = new TicketEntity();
 
 
         double finalizedSubtotal = 0.0; //compare against subtotal from the frontend client
+        double partsTotal = 0.0;
 
-        double partsTotal = 0.0; //summation of all the parts and their quantities per serviceEntity
 
-        for (int i = 0; i < ticket.getServiceEntity().size(); i++) {
-            for(int j = 0; j < ticket.getServiceEntity().get(i).getPartsRequired().size(); j++) {
-                    /* 'i' represents each serviceEntity */
-                    /* 'j' represents each serviceEntity */
 
-                partsTotal = ticket.getServiceEntity().get(i).getPartsRequired().indexOf(1) * ticket.getServiceEntity().get(i).getPartsRequired().indexOf(2);
+            billingInquiry = ticketRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Ticket not found."));
+
+            //First we loop through all the services
+            for (int loopService = 0; loopService < billingInquiry.getServiceEntity().size(); loopService++) {
+                //Now we loop through the parts
+                for (int loopParts = 0; loopParts < billingInquiry.getServiceEntity().indexOf(loopParts); loopParts++) {
+                    partsTotal = billingInquiry.getServiceEntity().indexOf(1) * billingInquiry.getServiceEntity().indexOf(2);
+                }
             }
-        }
 
 
 
 
-        return "SUCCESS";
+        return partsTotal;
 
     }
 

@@ -1,14 +1,16 @@
 package com.example.bandera.Services;
 
-import com.example.bandera.RequestModels.TicketDTO;
 import com.example.bandera.Configuration.TicketStatus;
-import com.example.bandera.Entities.*;
 import com.example.bandera.Repositories.CustomerRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
 import com.example.bandera.Repositories.TicketRepository;
 import com.example.bandera.Repositories.VehicleRepository;
+import com.example.bandera.RequestModels.TicketDTO;
+import com.example.bandera.TicketStatusEvent;
+import com.example.bandera.entities.*;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +22,9 @@ import java.util.List;
 @Service
 public class TicketService {
     //private final CustomerService customerService;
+
+
+    private final ApplicationEventPublisher eventPublisher;
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -32,8 +37,14 @@ public class TicketService {
 
     //find tickets with the id of the customer.
     @Autowired
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(ApplicationEventPublisher eventPublisher, TicketRepository ticketRepository) {
+        this.eventPublisher = eventPublisher;
         this.ticketRepository = ticketRepository;
+    }
+
+    public TicketService(ApplicationEventPublisher eventPublisher) {
+
+        this.eventPublisher = eventPublisher;
     }
 
     public List<TicketEntity> getTicketsByCustomerId(String customerId) {
@@ -167,11 +178,32 @@ public class TicketService {
         t.setDateTime(parsedDateTime);
         return ticketRepository.save(t);
     }
+
+
+
+
     public TicketEntity setStatus(String id, TicketStatus status) {
         //Getting the ticket entry first
         TicketEntity t = ticketRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
-        t.setTicketStatus(status);
-        return ticketRepository.save(t);
+
+
+        TicketStatus oldStatus = t.getTicketStatus();
+        if (!oldStatus.equals(status)) {
+            t.setTicketStatus(status);
+            ticketRepository.save(t);
+
+            TicketStatusEvent statusChange = new TicketStatusEvent(this, id, oldStatus, status);
+            eventPublisher.publishEvent(statusChange);
+        }
+
+
+        return t;
     }
+
+
+
+
+
+
 }

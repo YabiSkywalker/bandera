@@ -1,6 +1,6 @@
 package com.example.bandera.Services;
 
-import com.example.bandera.Entities.CustomersEntity;
+import com.example.bandera.entities.CustomersEntity;
 import com.example.bandera.Repositories.CustomerRepository;
 import com.example.bandera.Repositories.VehicleRepository;
 import org.apache.velocity.exception.ResourceNotFoundException;

@@ -1,8 +1,8 @@
 package com.example.bandera.Services;
 
 
-import com.example.bandera.Entities.TicketEntity;
-import com.example.bandera.Entities.VehicleEntity;
+import com.example.bandera.entities.TicketEntity;
+import com.example.bandera.entities.VehicleEntity;
 import com.example.bandera.Repositories.TicketRepository;
 import com.example.bandera.Repositories.VehicleRepository;
 import org.springframework.stereotype.Service;

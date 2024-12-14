@@ -1,8 +1,8 @@
 package com.example.bandera.Controllers;
 
 
-import com.example.bandera.Entities.TicketEntity;
-import com.example.bandera.Entities.VehicleEntity;
+import com.example.bandera.entities.TicketEntity;
+import com.example.bandera.entities.VehicleEntity;
 import com.example.bandera.Services.QueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;

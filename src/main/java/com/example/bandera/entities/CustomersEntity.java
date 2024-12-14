@@ -1,42 +1,34 @@
-package com.example.bandera.Entities;
+package com.example.bandera.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "employees_entity")
-public class EmployeesEntity {
+@Document(collection = "customers_entity")
+public class CustomersEntity {
     @Id
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 15)
     private String firstName;
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 15)
     private String lastName;
     @NotNull
     @Size(min = 1, max = 15)
     private String phoneNumber;
     @NotNull
-    private String address;
-    @NotNull
-    @Indexed(unique = true)
+    @Size(min = 1, max = 30)
     private String email;
 
 
-    // Initialize the list to avoid NullPointerException
-
-
-    /* --------------------------- Getters/Setters ---------------------------- */
 
     public String getId() {
         return id;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -53,20 +45,11 @@ public class EmployeesEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getEmail() {
@@ -77,22 +60,5 @@ public class EmployeesEntity {
         this.email = email;
     }
 
-    /*
-    @Override
-    public String toString() {
-        return "EmployeesEntity{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", assignments='" + assignments + '\'' +
-                '}';
-    }
 
-
-
- */
 }
-
