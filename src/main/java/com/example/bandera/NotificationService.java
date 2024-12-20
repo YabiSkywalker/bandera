@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.sns.model.PublishResponse;
 
 @Service
 public class NotificationService {
-    private final String Topic_Arn = "/////YOUR TOPIC ARN HERE";
+    private final String Topic_Arn = "arn:aws:sns:us-east-1:897105211357:TicketNotifications";
 
     public void sendNotification(String message) {
         try (SnsClient snsClient = SnsClient.builder().region(Region.US_EAST_1).build()) {
