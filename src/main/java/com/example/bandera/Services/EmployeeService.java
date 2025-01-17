@@ -1,5 +1,6 @@
 package com.example.bandera.Services;
 
+import com.example.bandera.DataModels.EmployeeUpdateDTO;
 import com.example.bandera.entities.EmployeesEntity;
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
@@ -29,6 +30,10 @@ public class EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found."));
     }
 
+    /*
+
+    <<<<<< --------   DEPRECATED   ---------  >>>>>>>>
+
     public EmployeesEntity addEmployee(EmployeesEntity employee) {
 
         EmployeesEntity savedEmployee = employeeRepository.save(employee);
@@ -37,7 +42,9 @@ public class EmployeeService {
 
     }
 
-    public EmployeesEntity updateEmployeeInfo(String id, EmployeesEntity update) {
+     */
+
+    public EmployeesEntity updateEmployeeInfo(String id, EmployeeUpdateDTO update) {
         EmployeesEntity e = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
@@ -46,7 +53,6 @@ public class EmployeeService {
         e.setAddress(update.getAddress());
         e.setPhoneNumber(update.getPhoneNumber());
         e.setEmail(update.getEmail());
-
 
 
         return employeeRepository.save(e);

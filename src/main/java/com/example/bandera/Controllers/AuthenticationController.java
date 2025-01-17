@@ -1,15 +1,13 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.RequestModels.AuthDTO;
+import com.example.bandera.DataModels.AuthDTO;
+import com.example.bandera.DataModels.EmployeeRegistryDTO;
 import com.example.bandera.Services.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -33,8 +31,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Register new user")
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody AuthDTO registerRequest) {
-        authenticationService.register(registerRequest);
+    public ResponseEntity<String> register(@RequestBody EmployeeRegistryDTO employeeInfo) {
+        authenticationService.register(employeeInfo);
         return ResponseEntity.status(HttpStatus.CREATED).body("Account created successfully");
     }
 

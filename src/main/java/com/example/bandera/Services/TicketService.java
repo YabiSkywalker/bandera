@@ -5,7 +5,7 @@ import com.example.bandera.Repositories.CustomerRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
 import com.example.bandera.Repositories.TicketRepository;
 import com.example.bandera.Repositories.VehicleRepository;
-import com.example.bandera.RequestModels.TicketDTO;
+import com.example.bandera.DataModels.TicketDTO;
 import com.example.bandera.TicketStatusEvent;
 import com.example.bandera.entities.*;
 import org.apache.velocity.exception.ResourceNotFoundException;

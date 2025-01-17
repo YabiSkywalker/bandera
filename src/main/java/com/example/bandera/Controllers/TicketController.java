@@ -1,6 +1,6 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.RequestModels.TicketDTO;
+import com.example.bandera.DataModels.TicketDTO;
 import com.example.bandera.Configuration.TicketStatus;
 import com.example.bandera.entities.ServiceEntity;
 import com.example.bandera.entities.TicketEntity;

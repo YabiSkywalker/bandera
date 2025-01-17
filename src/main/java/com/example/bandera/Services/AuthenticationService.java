@@ -1,13 +1,16 @@
 package com.example.bandera.Services;
 
 
-import com.example.bandera.entities.AuthorizationEntity;
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
-import com.example.bandera.RequestModels.AuthDTO;
+import com.example.bandera.DataModels.EmployeeRegistryDTO;
 import com.example.bandera.Secrets.JwtTokenUtil;
 import com.example.bandera.Secrets.PasswordUtil;
+import com.example.bandera.entities.AuthorizationEntity;
+import com.example.bandera.entities.EmployeesEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class AuthenticationService {
@@ -33,17 +36,30 @@ public class AuthenticationService {
         return jwtTokenUtil.generateToken(username);
     }
 
-    public void register(AuthDTO authDTO) {
-        if (authorizationRepository.findByEmail(authDTO.getEmail()).isPresent()) {
+    public void register(EmployeeRegistryDTO e) {
+        if (authorizationRepository.findByEmail(e.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exists");
         }
-        String hashPassword = PasswordUtil.hashPassword(authDTO.getPassword());
+
+        String userId = UUID.randomUUID().toString();
+        String hashPassword = PasswordUtil.hashPassword(e.getPassword());
 
         AuthorizationEntity newRegistry = new AuthorizationEntity();
-        newRegistry.setEmail(authDTO.getEmail());
+        newRegistry.setId(userId); // shared id with the authorization
+        newRegistry.setEmail(e.getEmail());
         newRegistry.setPassword(hashPassword);
 
+        /* ---------Account related info --------- */
+        EmployeesEntity newEmployee = new EmployeesEntity();
+        newEmployee.setId(userId); // shared id with the authorization
+        newEmployee.setFirstName(e.getFirstName());
+        newEmployee.setLastName(e.getLastName());
+        newEmployee.setPhoneNumber(e.getPhoneNumber());
+        newEmployee.setAddress(e.getAddress());
+        newEmployee.setEmail(e.getEmail());
+
         authorizationRepository.save(newRegistry);
+        employeeRepository.save(newEmployee);
 
     }
 }

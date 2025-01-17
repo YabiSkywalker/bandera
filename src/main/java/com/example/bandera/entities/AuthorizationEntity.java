@@ -1,7 +1,6 @@
 package com.example.bandera.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AuthorizationEntity {
 
     @Id
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
     private String email;
     private String username;

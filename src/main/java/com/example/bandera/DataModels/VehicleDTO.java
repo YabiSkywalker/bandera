@@ -1,4 +1,4 @@
-package com.example.bandera.RequestModels;
+package com.example.bandera.DataModels;
 
 public class VehicleDTO {
     private int year;

@@ -1,7 +1,8 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.entities.EmployeesEntity;
+import com.example.bandera.DataModels.EmployeeUpdateDTO;
 import com.example.bandera.Services.EmployeeService;
+import com.example.bandera.entities.EmployeesEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class EmployeesController {
     private EmployeeService employeeService;
     /* ------------------------- CREATE ---------------------------- */
 
+    /*
+    <<<<<< --------   DEPRECATED   ---------  >>>>>>>>
     @Operation(summary = "Add new employee as a user")
     @PostMapping("/addNewEmployee")
 
@@ -30,6 +33,7 @@ public class EmployeesController {
         return ResponseEntity.status(HttpStatus.CREATED).body(employees);
     }
 
+     */
     @Operation(summary = "Get all existing employees")
     @GetMapping("/getAllEmployees")
     public List<EmployeesEntity> getAllEmployees() {
@@ -37,6 +41,9 @@ public class EmployeesController {
     }
 
     /* ------------------------- READ ---------------------------- */
+
+
+
 
     @Operation(summary = "Get employee by employee id")
     @GetMapping("/{id}")
@@ -52,7 +59,7 @@ public class EmployeesController {
 
     @Operation(summary = "Update employee account information by their employee id.")
     @PatchMapping("/{id}/update")
-    public ResponseEntity<EmployeesEntity> updateEmployeeInfo(@PathVariable String id, @RequestBody EmployeesEntity update) {
+    public ResponseEntity<EmployeesEntity> updateEmployeeInfo(@PathVariable String id, @RequestBody EmployeeUpdateDTO update) {
         EmployeesEntity updateEmployee = employeeService.updateEmployeeInfo(id, update);
         return ResponseEntity.ok(updateEmployee);
     }

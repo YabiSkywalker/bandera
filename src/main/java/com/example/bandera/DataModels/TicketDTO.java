@@ -1,4 +1,4 @@
-package com.example.bandera.RequestModels;
+package com.example.bandera.DataModels;
 
 import com.example.bandera.Configuration.TicketStatus;
 import com.example.bandera.entities.ServiceEntity;

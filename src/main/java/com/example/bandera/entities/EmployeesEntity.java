@@ -1,6 +1,5 @@
 package com.example.bandera.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "employees_entity")
 public class EmployeesEntity {
     @Id
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
     @NotNull
     @Size(min = 1, max = 50)
@@ -37,6 +35,9 @@ public class EmployeesEntity {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

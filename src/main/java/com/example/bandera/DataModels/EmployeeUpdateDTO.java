@@ -1,21 +1,20 @@
-package com.example.bandera.RequestModels;
+package com.example.bandera.DataModels;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CustomerDTO {
+public class EmployeeUpdateDTO {
 
     @NotNull
-    @Size(min = 1, max = 15)
     private String firstName;
     @NotNull
-    @Size(min = 1, max = 15)
     private String lastName;
     @NotNull
     @Size(min = 1, max = 15)
     private String phoneNumber;
     @NotNull
-    @Size(min = 1, max = 30)
+    private String address;
+    @NotNull
     private String email;
 
     public String getFirstName() {
@@ -42,6 +41,14 @@ public class CustomerDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -49,4 +56,6 @@ public class CustomerDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
