@@ -1,7 +1,8 @@
 package com.example.bandera.Controllers;
 
-import com.example.bandera.DataModels.AuthDTO;
+import com.example.bandera.DataModels.RequestModels.AuthRequestDTO;
 import com.example.bandera.DataModels.EmployeeRegistryDTO;
+import com.example.bandera.DataModels.ResponseModels.AuthResponseDTO;
 import com.example.bandera.Services.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,10 +24,13 @@ public class AuthenticationController {
 
     @Operation(summary = "Login to generate token")
     @PostMapping("/login")
-    public ResponseEntity<?> authenticate(@RequestBody AuthDTO loginRequest) {
-        String token = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+    public ResponseEntity<AuthResponseDTO> authenticate(@RequestBody AuthRequestDTO loginRequest) {
+        //String token = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
 
-        return ResponseEntity.ok(new AuthDTO.AuthResponseDTO(token));
+        AuthResponseDTO response = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+
+        return ResponseEntity.ok(response);
+                //ResponseEntity.ok(new AuthRequestDTO.AuthResponseDTO(token));
     }
 
     @Operation(summary = "Register new user")

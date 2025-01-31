@@ -1,6 +1,7 @@
 package com.example.bandera.Services;
 
 
+import com.example.bandera.DataModels.ResponseModels.AuthResponseDTO;
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
 import com.example.bandera.DataModels.EmployeeRegistryDTO;
@@ -24,7 +25,7 @@ public class AuthenticationService {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    public String authenticate(String username, String password) {
+    public AuthResponseDTO authenticate(String username, String password) {
         AuthorizationEntity authorizationEntity = authorizationRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("Invalid username or password"));
 
@@ -32,9 +33,15 @@ public class AuthenticationService {
             throw new RuntimeException("Invalid username or password");
         }
 
+        AuthResponseDTO response = new AuthResponseDTO();
+
+        response.setId(authorizationEntity.getId());
+        response.setToken(jwtTokenUtil.generateToken(username));
+
         // Generate JWT token
-        return jwtTokenUtil.generateToken(username);
+        return response;
     }
+
 
     public void register(EmployeeRegistryDTO e) {
         if (authorizationRepository.findByEmail(e.getEmail()).isPresent()) {
@@ -60,7 +67,6 @@ public class AuthenticationService {
 
         authorizationRepository.save(newRegistry);
         employeeRepository.save(newEmployee);
-
     }
 }
 

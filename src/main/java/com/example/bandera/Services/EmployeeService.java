@@ -30,19 +30,10 @@ public class EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found."));
     }
 
-    /*
 
-    <<<<<< --------   DEPRECATED   ---------  >>>>>>>>
 
-    public EmployeesEntity addEmployee(EmployeesEntity employee) {
 
-        EmployeesEntity savedEmployee = employeeRepository.save(employee);
 
-        return savedEmployee;
-
-    }
-
-     */
 
     public EmployeesEntity updateEmployeeInfo(String id, EmployeeUpdateDTO update) {
         EmployeesEntity e = employeeRepository.findById(id)

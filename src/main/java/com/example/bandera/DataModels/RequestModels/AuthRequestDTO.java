@@ -1,6 +1,6 @@
-package com.example.bandera.DataModels;
+package com.example.bandera.DataModels.RequestModels;
 
-public class AuthDTO {
+public class AuthRequestDTO {
 
     private String email;
     //private String email;

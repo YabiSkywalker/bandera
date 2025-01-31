@@ -1,5 +1,6 @@
 package com.example.bandera.Controllers;
 
+import com.example.bandera.DataModels.ResponseModels.SetStatusResponseDTO;
 import com.example.bandera.DataModels.TicketDTO;
 import com.example.bandera.Configuration.TicketStatus;
 import com.example.bandera.entities.ServiceEntity;
@@ -101,8 +102,10 @@ public class TicketController {
 
     @Operation(summary = "Update ticket status by ticket id")
     @PatchMapping("/{id}/setStatus")
-    public ResponseEntity<TicketEntity> setStatus(String id, TicketStatus status) {
-        TicketEntity setStatus = ticketService.setStatus(id, status);
+    public ResponseEntity<SetStatusResponseDTO> setStatus(String id, TicketStatus status) {
+
+        //Used the response model here
+        SetStatusResponseDTO setStatus = ticketService.setStatus(id, status);
         return ResponseEntity.ok(setStatus);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bandera.Services;
 
 import com.example.bandera.Configuration.TicketStatus;
+import com.example.bandera.DataModels.ResponseModels.SetStatusResponseDTO;
 import com.example.bandera.Repositories.CustomerRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
 import com.example.bandera.Repositories.TicketRepository;
@@ -124,6 +125,8 @@ public class TicketService {
         return ticketRepository.save(t);
     }
 
+    //public
+
     public TicketEntity removeServices(String id, int index) {
         TicketEntity t = ticketRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
@@ -182,7 +185,7 @@ public class TicketService {
 
 
 
-    public TicketEntity setStatus(String id, TicketStatus status) {
+    public SetStatusResponseDTO setStatus(String id, TicketStatus status) {
         //Getting the ticket entry first
         TicketEntity t = ticketRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
@@ -197,8 +200,11 @@ public class TicketService {
             eventPublisher.publishEvent(statusChange);
         }
 
+        SetStatusResponseDTO newStatus = new SetStatusResponseDTO();
+        newStatus.setId(t.getId());
+        newStatus.setTicketStatus(t.getTicketStatus());
 
-        return t;
+        return newStatus;
     }
 
 
