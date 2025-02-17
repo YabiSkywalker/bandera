@@ -78,6 +78,13 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.removeServices(id, index));
     }
 
+
+    @Operation(summary = "Delete ticket by ticket id")
+    @DeleteMapping("/{ticketId}/delete")
+    public String deleteTicket(@PathVariable String ticketId) {
+        return ticketService.deleteTicket(ticketId);
+    }
+
     @Operation(summary = "Locate ticket by ticket id, and locate employee by employee id then update ticket assignee")
     @PatchMapping("/updateAssignee/{ticketId}")
     public ResponseEntity<TicketEntity> updateAssignee(@PathVariable String ticketId, String employeeId) {

@@ -68,7 +68,7 @@ public class CustomerService {
                  .orElseThrow(() -> new ResourceNotFoundException("Customer not found."));
 
         //actually performing the delete here
-        customerRepository.deleteById(id);
+        customerRepository.delete(customer);
 
         //return the customer that just got deleted (just in case I forget why I wrote this)
         return customer;

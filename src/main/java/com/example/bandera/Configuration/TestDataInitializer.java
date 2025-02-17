@@ -1,7 +1,7 @@
 package com.example.bandera.Configuration;
 
 //This class is ONLY to ingest minimum ref data (enough to get a bearer token for login)
-/*
+
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.entities.AuthorizationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +34,3 @@ public class TestDataInitializer implements CommandLineRunner {
 }
 
 
-*/

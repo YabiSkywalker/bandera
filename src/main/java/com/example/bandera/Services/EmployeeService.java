@@ -1,6 +1,7 @@
 package com.example.bandera.Services;
 
 import com.example.bandera.DataModels.EmployeeUpdateDTO;
+import com.example.bandera.entities.AuthorizationEntity;
 import com.example.bandera.entities.EmployeesEntity;
 import com.example.bandera.Repositories.AuthorizationRepository;
 import com.example.bandera.Repositories.EmployeeRepository;
@@ -52,9 +53,13 @@ public class EmployeeService {
         EmployeesEntity employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found."));
 
-        employeeRepository.deleteById(id);
+        AuthorizationEntity e = authorizationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Auth not found."));
 
+        authorizationRepository.deleteById(id);
+        employeeRepository.deleteById(id);
         return employee;
+
     }
 
 

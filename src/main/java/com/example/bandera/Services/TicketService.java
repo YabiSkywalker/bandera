@@ -134,6 +134,16 @@ public class TicketService {
         return ticketRepository.save(t);
     }
 
+
+    public String deleteTicket(String ticketId) {
+        TicketEntity t = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        ticketRepository.delete(t);
+
+        return ticketId + "successfully deleted";
+    }
+
     //only updates the assignee portion of the JSON
     public TicketEntity updateAssignee(String ticketId, String employeeId) {
         //identify the ticket first with this
