@@ -9,7 +9,13 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git credentialsId: env.GIT_CREDENTIALS_ID, url: 'https://github.com/YabiSkywalker/bandera.git'
+                git branch: "main", url: "https://github.com/YabiSkywalker/bandera.git"
+            }
+        }
+
+        stage('Clean Package') {
+            steps {
+                sh "mvn clean package"
             }
         }
 
