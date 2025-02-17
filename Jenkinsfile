@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GIT_CREDENTIALS_ID = 'YabiSkywalker'
-        DOCKER_CREDENTIALS_ID = 'yabiskywalker'
+        DOCKER_CREDENTIALS_ID = 'JenkinsToDocker'
         JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
     }
 
@@ -33,11 +33,25 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
+        stage('Authenticate Docker') {
+            steps {
+
+                withCredentials([usernamePassword(
+                    credentialsId: env.DOCKER_CREDENTIALS_ID,
+                    usernameVariable: 'DOCKER_HUB_USER',
+                    passwordVariable: 'DOCKER_HUB_PASSWORD'
+                )])
+
+                sh """echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USER} --password-stdin"""
+            }
+        }
+
+        stage('Docker Push') {
             steps {
                 sh "docker push yabiskywalker/bandera-service-images:v1.01"
             }
         }
+
     }
 
     post {
