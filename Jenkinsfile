@@ -6,11 +6,13 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git credentialsId: env.GIT_CREDENTIALS_ID, url: 'https://github.com/YabiSkywalker/bandera.git',
+                git credentialsId: env.GIT_CREDENTIALS_ID, url: 'https://github.com/YabiSkywalker/bandera.git'
             }
         }
+
         stage('Build') {
             steps {
                 sh "docker buildx build --platform=linux/amd64 -t bandera-svc ."
