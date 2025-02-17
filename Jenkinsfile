@@ -35,14 +35,13 @@ pipeline {
 
         stage('Authenticate Docker') {
             steps {
-
                 withCredentials([usernamePassword(
                     credentialsId: env.DOCKER_CREDENTIALS_ID,
                     usernameVariable: 'DOCKER_HUB_USER',
                     passwordVariable: 'DOCKER_HUB_PASSWORD'
-                )])
-
-                sh """echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USER} --password-stdin"""
+                )]) {
+                    sh """echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USER} --password-stdin"""
+                }
             }
         }
 
