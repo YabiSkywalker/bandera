@@ -30,7 +30,7 @@ pipeline {
 
         stage('Tag') {
             steps {
-                sh "docker tag bandera-svc yabiskywalker/bandera-service-images:v1.01 "
+                sh "docker tag bandera-svc yabiskywalker/bandera-service-images:${env.BUILD_VERSION"
             }
         }
 
@@ -48,7 +48,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                sh "docker push yabiskywalker/bandera-service-images:v1.01"
+                sh "docker push yabiskywalker/bandera-service-images:${env.BUILD_VERSION}"
             }
         }
 
@@ -75,7 +75,7 @@ pipeline {
                                           sources:
                                             - identifier: "Primary"
                                               spec:
-                                                tag: "${BUILD_VERSION}"
+                                                tag: "${env.BUILD_VERSION}"
                     '
                 """
             }
