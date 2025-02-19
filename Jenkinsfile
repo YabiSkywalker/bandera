@@ -30,7 +30,7 @@ pipeline {
 
         stage('Tag') {
             steps {
-                sh "docker tag bandera-svc yabiskywalker/bandera-service-images:${env.BUILD_VERSION"
+                sh "docker tag bandera-svc yabiskywalker/bandera-service-images:${env.BUILD_VERSION}"
             }
         }
 
