@@ -93,31 +93,3 @@ pipeline {
     }
 }
 
-
-
-
-curl -X POST "https://app.harness.io/gateway/pipeline/api/pipeline/execute/RollingDeploy?accountIdentifier=kQsoKw8wQV6hD_BlSuffZA&orgIdentifier=default&projectIdentifier=default_project" \
-  -H "Content-Type: application/yaml" \
-  -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY" \
-  -d '
-pipeline:
-  identifier: "RollingDeploy"
-  stages:
-    - stage:
-        identifier: "Deploy"
-        type: "Deployment"
-        spec:
-          service:
-            serviceInputs:
-              serviceDefinition:
-                spec:
-                  artifacts:
-                    primary:
-                      sources:
-                        - identifier: "Primary"
-                          spec:
-                            tag: "v1.0"
-
-
-
-
