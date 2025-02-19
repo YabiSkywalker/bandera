@@ -6,6 +6,12 @@ pipeline {
         GIT_CREDENTIALS_ID           =         'YabiSkywalker'
         DOCKER_CREDENTIALS_ID        =         'JenkinsToDocker'
         JAVA_HOME                    =         '/usr/lib/jvm/java-17-openjdk-amd64'
+        ACC_ID                       =         'kQsoKw8wQV6hD_BlSuffZA'
+        PROJ_ID                      =         'default_project'
+        ORG_ID                       =         'default'
+        DPL_PIPE                     =         'RollingDeploy'
+        HARN_API                     =         'app.harness.io/gateway/pipeline/api/pipeline/execute'
+        CHECK_API                    =         'app.harness.io/pipeline/api/pipelines/execution/v2'
     }
 
     stages {
@@ -54,34 +60,54 @@ pipeline {
 
         stage('reDeploy') {
             steps {
-                sh """
-                    curl -X POST "https://app.harness.io/gateway/pipeline/api/pipeline/execute/RollingDeploy?accountIdentifier=kQsoKw8wQV6hD_BlSuffZA&orgIdentifier=default&projectIdentifier=default_project" \\
-                    -H "Content-Type: application/yaml" \\
-                    -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY" \\
-                    -d '
-                    pipeline:
-                      identifier: "RollingDeploy"
-                      stages:
-                        - stage:
-                            identifier: "Deploy"
-                            type: "Deployment"
-                            spec:
-                              service:
-                                serviceInputs:
-                                  serviceDefinition:
-                                    spec:
-                                      artifacts:
-                                        primary:
-                                          sources:
-                                            - identifier: "Primary"
-                                              spec:
-                                                tag: "${env.BUILD_VERSION}"
-                    '
-                """
+
+                script {
+                    def harnessTrigger = sh(script: sh """
+                                   curl -X POST "https://${env.HARN_API}/${env.DPL_PIPE}?accountIdentifier=${env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
+                                   -H "Content-Type: application/yaml" \\
+                                   -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY" \\
+                                   -d '
+                                   pipeline:
+                                     identifier: "RollingDeploy"
+                                     stages:
+                                       - stage:
+                                           identifier: "Deploy"
+                                           type: "Deployment"
+                                           spec:
+                                             service:
+                                               serviceInputs:
+                                                 serviceDefinition:
+                                                   spec:
+                                                     artifacts:
+                                                       primary:
+                                                         sources:
+                                                           - identifier: "Primary"
+                                                             spec:
+                                                               tag: "${env.BUILD_VERSION}"
+                                   '
+                               """, returnStdout: true
+                    ).trim()
+
+                    def harnessOutput = readJSON text: harnessTrigger
+                    def peid = harnessOutput.data.pipelineExecutionSummary.planExecutionId
+
+                    def checkStatus = sh(script" sh """
+                        curl -i -X GET "https://${env.CHECK_API}/${peid}?accountIdentifier={env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
+                        -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY"
+                        """, returnStdout: true
+                    ).trim()
+
+                    def checkStatusOutput = readJSON text: checkStatus
+                    def status = checkStatusOutput.data.pipelineExecutionSummary.status
+                    echo "Harness Pipeline Status: ${status}"
+
+                    if (status != "Success") {
+                        error "Harness pipeline failed with status: ${status}"
+                    }
+
+                }
             }
         }
-
-
     }
 
     post {
@@ -93,4 +119,3 @@ pipeline {
         }
     }
 }
-
