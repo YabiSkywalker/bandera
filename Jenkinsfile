@@ -91,11 +91,10 @@ pipeline {
                     def harnessOutput = readJSON text: harnessTrigger
                     def peid = harnessOutput.data.pipelineExecutionSummary.planExecutionId
 
-                    def checkStatus = sh(script" sh """
+                    def checkStatus = sh(script: sh """
                         curl -i -X GET "https://${env.CHECK_API}/${peid}?accountIdentifier={env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
                         -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY"
-                        """, returnStdout: true
-                    ).trim()
+                    """, returnStdout: true).trim()
 
                     def checkStatusOutput = readJSON text: checkStatus
                     def status = checkStatusOutput.data.pipelineExecutionSummary.status
