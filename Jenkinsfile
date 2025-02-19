@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDENTIALS_ID = 'YabiSkywalker'
-        DOCKER_CREDENTIALS_ID = 'JenkinsToDocker'
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        BUILD_VERSION                =         'v1.02'
+        GIT_CREDENTIALS_ID           =         'YabiSkywalker'
+        DOCKER_CREDENTIALS_ID        =         'JenkinsToDocker'
+        JAVA_HOME                    =         '/usr/lib/jvm/java-17-openjdk-amd64'
     }
 
     stages {
@@ -53,11 +54,11 @@ pipeline {
 
         stage('reDeploy') {
             steps {
-                sh '''
+                sh """
                     curl -X POST "https://app.harness.io/gateway/pipeline/api/pipeline/execute/RollingDeploy?accountIdentifier=kQsoKw8wQV6hD_BlSuffZA&orgIdentifier=default&projectIdentifier=default_project" \\
                     -H "Content-Type: application/yaml" \\
                     -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY" \\
-                    -d $'
+                    -d '
                     pipeline:
                       identifier: "RollingDeploy"
                       stages:
@@ -74,9 +75,9 @@ pipeline {
                                           sources:
                                             - identifier: "Primary"
                                               spec:
-                                                tag: "v1.01"
+                                                tag: "${BUILD_VERSION}"
                     '
-                '''
+                """
             }
         }
 
