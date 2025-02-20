@@ -89,27 +89,6 @@ pipeline {
                                    '
                                """, returnStdout: true
                     ).trim()
-
-                    def harnessOutput = new JsonSlurper().parseText(harnessTrigger)
-                    def peid = harnessOutput?.data?.pipelineExecutionSummary?.planExecutionId ?: ""
-
-                    if (!peid) {
-                       error "Failed to retrieve planExecutionId from Harness response."
-                    }
-
-                    def checkStatus = sh(script: """
-                        curl -i -X GET "https://${env.CHECK_API}/${env.peid}?accountIdentifier=${env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
-                        -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY"
-                    """, returnStdout: true).trim()
-
-                    def checkStatusOutput = new JsonSlurper().parseText(checkStatus)
-                    def status = checkStatusOutput.data.pipelineExecutionSummary.status
-                    echo "Harness Pipeline Status: ${status}"
-
-                    if (status != "Success") {
-                        error "Harness pipeline failed with status: ${status}"
-                    }
-
                 }
             }
         }
