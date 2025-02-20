@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 pipeline {
     agent any
 
@@ -88,7 +90,6 @@ pipeline {
                                """, returnStdout: true
                     ).trim()
 
-                    import groovy.json.JsonSlurper
                     def harnessOutput = new JsonSlurper().parseText(harnessTrigger)
                     def peid = harnessOutput?.data?.pipelineExecutionSummary?.planExecutionId ?: ""
 
