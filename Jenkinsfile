@@ -89,7 +89,11 @@ pipeline {
                     ).trim()
 
                     def harnessOutput = readJSON text: harnessTrigger
-                    def peid = harnessOutput.data.pipelineExecutionSummary.planExecutionId
+                    def peid = harnessOutput?.data?.pipelineExecutionSummary?.planExecutionId ?: ""
+
+                    if (!peid) {
+                       error "Failed to retrieve planExecutionId from Harness response."
+                    }
 
                     def checkStatus = sh(script: """
                         curl -i -X GET "https://${env.CHECK_API}/${env.peid}?accountIdentifier=${env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
