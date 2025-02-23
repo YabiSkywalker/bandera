@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     environment {
-        BUILD_VERSION                =         'v1.02'
+        BUILD_VERSION                =         'v1.03'
         GIT_CREDENTIALS_ID           =         'YabiSkywalker'
         DOCKER_CREDENTIALS_ID        =         'JenkinsToDocker'
         JAVA_HOME                    =         '/usr/lib/jvm/java-17-openjdk-amd64'

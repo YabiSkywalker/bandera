@@ -27,10 +27,6 @@ public class TestDataInitializer implements CommandLineRunner {
         testUser.setEmail(testEmail);
         testUser.setPassword(testPassword);
 
-
-        // Save to MongoDB
         authorizationRepository.save(testUser);
     }
 }
-
-
