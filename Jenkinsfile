@@ -67,7 +67,7 @@ pipeline {
                     def harnessTrigger = sh(script: """
                                    curl -X POST "https://${env.HARN_API}/${env.DPL_PIPE}?accountIdentifier=${env.ACC_ID}&orgIdentifier=${env.ORG_ID}&projectIdentifier=${env.PROJ_ID}" \\
                                    -H "Content-Type: application/yaml" \\
-                                   -H "x-api-key: pat.kQsoKw8wQV6hD_BlSuffZA.67b4ff61f58a04569cf6a0f5.ZzIXq5URfWz2gMBLHgHY" \\
+                                   -H "x-api-key: <<<<API_KEY>>>" \\
                                    -d '
                                    pipeline:
                                      identifier: "RollingDeploy"
